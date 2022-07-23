@@ -18,15 +18,6 @@ fun main() {
     println(processList(listOf(25, "2", null, false,null,true,"hola")))
 }
 
-fun typeOf(obj : Any?):String? {//function that sets the type of the item in the list
-    return when (obj) {
-        is Int -> "entero"
-        is String -> "cadena" 
-        is Boolean -> "booleano"
-        else -> null
-      }
-}
-
 fun infoOf(obj : Any?):String? {//function that gets the info of the item in list
     return when (obj) {
         is Int -> return when{
@@ -46,8 +37,12 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     val wList = ArrayList<ItemData>()
     for (item in inputList.orEmpty()){
        item?.let{
-            val cItem = ItemData(inputList.indexOf(item),item,typeOf(item),infoOf(item))
-            wList.add(cItem)
+            when (item){
+                is Int -> wList.add(ItemData(inputList.indexOf(item),item,"entero",infoOf(item)))
+                is String -> wList.add(ItemData(inputList.indexOf(item),item,"cadena",infoOf(item)))
+                is Boolean -> wList.add(ItemData(inputList.indexOf(item),item,"booleano",infoOf(item)))
+                else -> wList.add(ItemData(inputList.indexOf(item),item,null,null))
+            }
         }
     }
     return wList
