@@ -2,7 +2,7 @@
 * Universidad del Valle de Guatemala
 * Programacion de Plataformas Moviles - Sec 20
 * Andres Quezada - 21085
-* 17/07/22
+* 23/07/22
 **/
 
 // No tocar esta clase ---
@@ -48,11 +48,10 @@ fun infoOf(obj : Any?):String? {//function that gets the info of the item in lis
 }
 
 fun processList(inputList: List<Any?>?): List<ItemData>? {
-    
     if (inputList == null) return null
     val wList = ArrayList<ItemData>()
     for (item in inputList.orEmpty()){
-        if (item != null){
+       item?.let{
             val index = inputList.indexOf(item)
             val cItem = ItemData(index,item,typeOf(item),infoOf(item))
             wList.add(cItem)
