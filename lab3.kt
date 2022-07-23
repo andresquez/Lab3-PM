@@ -28,18 +28,13 @@ fun typeOf(obj : Any?):String? {//function that sets the type of the item in the
       }
 }
 
-fun infoVI(num : Int):String?{//function that gets info Version Int, return the info of the int
-    return when{
+fun infoOf(obj : Any?):String? {//function that gets the info of the item in list
+    return when (obj) {
+        is Int -> return when{
         num % 10 == 0 ->  "M10"
         num % 5 == 0 -> "M5"
         num % 2 == 0 -> "M2"
-        else -> null
-    }
-}
-
-fun infoOf(obj : Any?):String? {//function that gets the info of the item in list
-    return when (obj) {
-        is Int -> infoVI(obj)
+        else -> null}
         is String -> "L${obj.length}"
         true -> "Verdadero"
         false -> "Falso"
