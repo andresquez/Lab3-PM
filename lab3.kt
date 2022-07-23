@@ -15,8 +15,7 @@ data class ItemData(
 // -----------------------
 
 fun main() {
-    val result = processList(listOf(25, "2", null, false,null,true,"hola"))
-    println(result)
+    println(processList(listOf(25, "2", null, false,null,true,"hola")))
 }
 
 fun typeOf(obj : Any?):String? {//function that sets the type of the item in the list
