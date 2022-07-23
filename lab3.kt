@@ -2,7 +2,7 @@
 * Universidad del Valle de Guatemala
 * Programacion de Plataformas Moviles - Sec 20
 * Andres Quezada - 21085
-* 17/07/22
+* 23/07/22
 **/
 
 // No tocar esta clase ---
@@ -15,47 +15,25 @@ data class ItemData(
 // -----------------------
 
 fun main() {
-    val result = processList(listOf(25, "2", null, false,null,true,"hola"))
-    println(result)
-}
-
-fun typeOf(obj : Any?):String? {//function that sets the type of the item in the list
-    return when (obj) {
-        is Int -> "entero"
-        is String -> "cadena" 
-        is Boolean -> "booleano"
-        else -> null
-      }
-}
-
-fun infoVI(num : Int):String?{//function that gets info Version Int, return the info of the int
-    return when{
-        num % 10 == 0 ->  "M10"
-        num % 5 == 0 -> "M5"
-        num % 2 == 0 -> "M2"
-        else -> null
-    }
-}
-
-fun infoOf(obj : Any?):String? {//function that gets the info of the item in list
-    return when (obj) {
-        is Int -> infoVI(obj)
-        is String -> "L${obj.length}"
-        true -> "Verdadero"
-        false -> "Falso"
-        else -> null
-      }
+    println(processList(listOf(25, "2", null, false,null,true,"hola")))
 }
 
 fun processList(inputList: List<Any?>?): List<ItemData>? {
-    
     if (inputList == null) return null
     val wList = ArrayList<ItemData>()
     for (item in inputList.orEmpty()){
-        if (item != null){
-            val index = inputList.indexOf(item)
-            val cItem = ItemData(index,item,typeOf(item),infoOf(item))
-            wList.add(cItem)
+       item?.let{
+            when (item){
+                is Int -> wList.add(ItemData(inputList.indexOf(item),item,"entero",when{
+                    item % 10 == 0 ->  "M10"
+                    item % 5 == 0 -> "M5"
+                    item % 2 == 0 -> "M2"
+                    else -> null}))
+                is String -> wList.add(ItemData(inputList.indexOf(item),item,"cadena","L${item.length}"))
+                true -> wList.add(ItemData(inputList.indexOf(item),item,"booleano","verdadero"))
+                false -> wList.add(ItemData(inputList.indexOf(item),item,"booleano","falso"))
+                else -> wList.add(ItemData(inputList.indexOf(item),item,null,null))
+            }
         }
     }
     return wList
