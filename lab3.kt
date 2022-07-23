@@ -52,8 +52,7 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     val wList = ArrayList<ItemData>()
     for (item in inputList.orEmpty()){
        item?.let{
-            val index = inputList.indexOf(item)
-            val cItem = ItemData(index,item,typeOf(item),infoOf(item))
+            val cItem = ItemData(inputList.indexOf(item),item,typeOf(item),infoOf(item))
             wList.add(cItem)
         }
     }
